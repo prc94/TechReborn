@@ -60,7 +60,8 @@ configurations {
 }
 
 def ENV = System.getenv()
-def build_number = ENV.BUILD_NUMBER ?: "local"
+def build_timestamp = new Date().format("yyyyMMdd'-'hhmm")
+def build_number = ENV.BUILD_NUMBER ?: "local-$build_timestamp-dev"
 version = "${version}+build.$build_number"
 
 license {
@@ -195,6 +196,10 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
+minecraft {
+    remapMod = false
+}
+
 publishing {
 	publications {
 		maven(MavenPublication) {
@@ -202,16 +207,16 @@ publishing {
 			artifactId project.archivesBaseName
 			version project.version
 
-			artifact(remapJar) {
-				builtBy remapJar
+			artifact(jar) {
+				builtBy jar
 			}
 			artifact(sourcesJar) {
-				builtBy remapSourcesJar
+				builtBy sourcesJar
 			}
 		}
 	}
 	repositories {
-		maven {
+		/*maven {
 			url "http://mavenupload.modmuss50.me/"
 			if (project.hasProperty('mavenPass')) {
 				credentials {
@@ -219,7 +224,14 @@ publishing {
 					password project.getProperty('mavenPass')
 				}
 			}
-		}
+		}*/
+        maven {
+            url "https://maven.pkg.github.com/prc94/TechReborn/"
+            credentials {
+                username = ENV.get("GITHUB_ACTOR")
+                password = ENV.get("GITHUB_TOKEN")
+            }
+        }
 	}
 }
 
