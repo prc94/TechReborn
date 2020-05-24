@@ -54,8 +54,8 @@ repositories {
     maven {
         url = "https://maven.pkg.github.com/prc94/RebornCore/"
         credentials {
-            username = ENV.get("GITHUB_ACTOR")
-            password = ENV.get("GITHUB_TOKEN")
+            username = ENV.GITHUB_ACTOR
+            password = ENV.GITHUB_TOKEN
         }
     }
 }
@@ -135,7 +135,6 @@ processResources {
 
 jar {
 	exclude "**/*.psd"
-	classifier = 'universal'
 
 	from { crowdin.getDidWork() ? fileTree('build/translations').matching{exclude "**/en_US.json"} : null}
 	dependsOn 'fixTranslations'
@@ -235,8 +234,8 @@ publishing {
         maven {
             url "https://maven.pkg.github.com/prc94/TechReborn/"
             credentials {
-                username = ENV.get("GITHUB_ACTOR")
-                password = ENV.get("GITHUB_TOKEN")
+                username = ENV.GITHUB_ACTOR
+                password = ENV.GITHUB_TOKEN
             }
         }
 	}
