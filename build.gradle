@@ -81,7 +81,7 @@ group = 'TechReborn'
 
 dependencies {
 	minecraft "com.mojang:minecraft:1.15.2"
-	mappings "net.fabricmc:yarn:1.15.2+build.2:v2"
+	mappings "net.fabricmc:yarn:1.15.2+build.15:v2"
 	modImplementation "net.fabricmc:fabric-loader:0.7.5+build.178"
 
 	//Fabric api
@@ -91,7 +91,7 @@ dependencies {
 	optionalDependency ('io.github.cottonmc:LibCD:2.0.1+1.15')
 	optionalDependency ('com.github.emilyploszaj:trinkets:2.4.2')
 
-	def rcVersion = 'RebornCore:RebornCore-115:4.2.9+build.local-20200524-0349-dev'
+	def rcVersion = 'RebornCore:RebornCore-115:4.2.9+build.local-20200524-1005-dev'
 	modApi (rcVersion) {
 		exclude group: "net.fabricmc"
 	}

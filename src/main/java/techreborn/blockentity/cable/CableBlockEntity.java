@@ -27,11 +27,11 @@ package techreborn.blockentity.cable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.network.packet.BlockEntityUpdateS2CPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -104,7 +104,6 @@ public class CableBlockEntity extends BlockEntity
         toTag(nbtTag);
         return new BlockEntityUpdateS2CPacket(getPos(), 1, nbtTag);
     }
-
 
     @Override
     public void fromTag(CompoundTag compound) {
