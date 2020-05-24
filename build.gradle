@@ -29,6 +29,7 @@ apply plugin: "com.wynprice.cursemaven"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+def ENV = System.getenv()
 
 repositories {
 	maven {
@@ -50,6 +51,13 @@ repositories {
 	maven {
 		url = "https://jitpack.io"
 	}
+    maven {
+        url = "https://maven.pkg.github.com/prc94/RebornCore/"
+        credentials {
+            username = ENV.get("GITHUB_ACTOR")
+            password = ENV.get("GITHUB_TOKEN")
+        }
+    }
 }
 
 version = "3.3.11"
@@ -59,7 +67,6 @@ configurations {
 	compile.extendsFrom shade
 }
 
-def ENV = System.getenv()
 def build_timestamp = new Date().format("yyyyMMdd'-'hhmm")
 def build_number = ENV.BUILD_NUMBER ?: "local-$build_timestamp-dev"
 version = "${version}+build.$build_number"
@@ -84,7 +91,7 @@ dependencies {
 	optionalDependency ('io.github.cottonmc:LibCD:2.0.1+1.15')
 	optionalDependency ('com.github.emilyploszaj:trinkets:2.4.2')
 
-	def rcVersion = 'RebornCore:RebornCore-1.15:+'
+	def rcVersion = 'RebornCore:RebornCore-115:4.2.9+build.local-20200524-0349-dev'
 	modApi (rcVersion) {
 		exclude group: "net.fabricmc"
 	}
